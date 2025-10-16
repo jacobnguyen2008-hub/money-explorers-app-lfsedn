@@ -1,161 +1,210 @@
-import React from "react";
-import { Stack, Link } from "expo-router";
-import { FlatList, Pressable, StyleSheet, View, Text, Alert, Platform } from "react-native";
-import { IconSymbol } from "@/components/IconSymbol";
-import { GlassView } from "expo-glass-effect";
-import { useTheme } from "@react-navigation/native";
 
-const ICON_COLOR = "#007AFF";
+import React from 'react';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Animated } from 'react-native';
+import { useRouter } from 'expo-router';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { colors, commonStyles } from '@/styles/commonStyles';
+import { useProgress } from '@/contexts/ProgressContext';
+import { LinearGradient } from 'expo-linear-gradient';
 
 export default function HomeScreen() {
-  const theme = useTheme();
-  const modalDemos = [
+  const router = useRouter();
+  const { progress } = useProgress();
+  const scaleAnim = React.useRef(new Animated.Value(1)).current;
+
+  const menuItems = [
     {
-      title: "Standard Modal",
-      description: "Full screen modal presentation",
-      route: "/modal",
-      color: "#007AFF",
+      title: 'Learn',
+      icon: '📚',
+      color: colors.primary,
+      route: '/(tabs)/learn',
+      description: 'Fun lessons about money!',
     },
     {
-      title: "Form Sheet",
-      description: "Bottom sheet with detents and grabber",
-      route: "/formsheet",
-      color: "#34C759",
+      title: 'Games',
+      icon: '🎮',
+      color: colors.secondary,
+      route: '/(tabs)/games',
+      description: 'Play and learn!',
     },
     {
-      title: "Transparent Modal",
-      description: "Overlay without obscuring background",
-      route: "/transparent-modal",
-      color: "#FF9500",
-    }
+      title: 'Quiz',
+      icon: '🧠',
+      color: colors.accent,
+      route: '/(tabs)/learn',
+      description: 'Test your knowledge!',
+    },
+    {
+      title: 'Rewards',
+      icon: '🏆',
+      color: '#A78BFA',
+      route: '/(tabs)/rewards',
+      description: 'Collect badges & stickers!',
+    },
+    {
+      title: 'Progress',
+      icon: '📊',
+      color: '#F472B6',
+      route: '/(tabs)/progress',
+      description: 'See how far you&apos;ve come!',
+    },
   ];
 
-  const renderModalDemo = ({ item }: { item: (typeof modalDemos)[0] }) => (
-    <GlassView style={[
-      styles.demoCard,
-      Platform.OS !== 'ios' && { backgroundColor: theme.dark ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.05)' }
-    ]} glassEffectStyle="regular">
-      <View style={[styles.demoIcon, { backgroundColor: item.color }]}>
-        <IconSymbol name="square.grid.3x3" color="white" size={24} />
-      </View>
-      <View style={styles.demoContent}>
-        <Text style={[styles.demoTitle, { color: theme.colors.text }]}>{item.title}</Text>
-        <Text style={[styles.demoDescription, { color: theme.dark ? '#98989D' : '#666' }]}>{item.description}</Text>
-      </View>
-      <Link href={item.route as any} asChild>
-        <Pressable>
-          <GlassView style={[
-            styles.tryButton,
-            Platform.OS !== 'ios' && { backgroundColor: theme.dark ? 'rgba(255,255,255,0.15)' : 'rgba(0,0,0,0.08)' }
-          ]} glassEffectStyle="clear">
-            <Text style={[styles.tryButtonText, { color: theme.colors.primary }]}>Try It</Text>
-          </GlassView>
-        </Pressable>
-      </Link>
-    </GlassView>
-  );
-
-  const renderHeaderRight = () => (
-    <Pressable
-      onPress={() => Alert.alert("Not Implemented", "This feature is not implemented yet")}
-      style={styles.headerButtonContainer}
-    >
-      <IconSymbol name="plus" color={theme.colors.primary} />
-    </Pressable>
-  );
-
-  const renderHeaderLeft = () => (
-    <Pressable
-      onPress={() => Alert.alert("Not Implemented", "This feature is not implemented yet")}
-      style={styles.headerButtonContainer}
-    >
-      <IconSymbol
-        name="gear"
-        color={theme.colors.primary}
-      />
-    </Pressable>
-  );
+  const handlePress = (route: string) => {
+    Animated.sequence([
+      Animated.timing(scaleAnim, {
+        toValue: 0.95,
+        duration: 100,
+        useNativeDriver: true,
+      }),
+      Animated.timing(scaleAnim, {
+        toValue: 1,
+        duration: 100,
+        useNativeDriver: true,
+      }),
+    ]).start(() => {
+      router.push(route as any);
+    });
+  };
 
   return (
-    <>
-      {Platform.OS === 'ios' && (
-        <Stack.Screen
-          options={{
-            title: "Building the app...",
-            headerRight: renderHeaderRight,
-            headerLeft: renderHeaderLeft,
-          }}
-        />
-      )}
-      <View style={[styles.container, { backgroundColor: theme.colors.background }]}>
-        <FlatList
-          data={modalDemos}
-          renderItem={renderModalDemo}
-          keyExtractor={(item) => item.route}
-          contentContainerStyle={[
-            styles.listContainer,
-            Platform.OS !== 'ios' && styles.listContainerWithTabBar
-          ]}
-          contentInsetAdjustmentBehavior="automatic"
-          showsVerticalScrollIndicator={false}
-        />
-      </View>
-    </>
+    <SafeAreaView style={commonStyles.container} edges={['top']}>
+      <ScrollView
+        contentContainerStyle={styles.scrollContent}
+        showsVerticalScrollIndicator={false}
+      >
+        <View style={styles.header}>
+          <Text style={styles.welcomeText}>Welcome to</Text>
+          <Text style={styles.appTitle}>Money Quest! 🚀</Text>
+          <Text style={styles.subtitle}>Learn about money the fun way!</Text>
+          
+          <View style={styles.coinsContainer}>
+            <Text style={styles.coinsText}>💰 {progress.coins} Coins</Text>
+          </View>
+        </View>
+
+        <View style={styles.characterContainer}>
+          <Text style={styles.character}>🦸‍♂️</Text>
+          <View style={styles.speechBubble}>
+            <Text style={styles.speechText}>
+              Let&apos;s go on a money adventure!
+            </Text>
+          </View>
+        </View>
+
+        <View style={styles.menuGrid}>
+          {menuItems.map((item, index) => (
+            <TouchableOpacity
+              key={index}
+              activeOpacity={0.8}
+              onPress={() => handlePress(item.route)}
+            >
+              <View style={[styles.menuCard, { backgroundColor: item.color }]}>
+                <Text style={styles.menuIcon}>{item.icon}</Text>
+                <Text style={styles.menuTitle}>{item.title}</Text>
+                <Text style={styles.menuDescription}>{item.description}</Text>
+              </View>
+            </TouchableOpacity>
+          ))}
+        </View>
+
+        <View style={styles.bottomPadding} />
+      </ScrollView>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    // backgroundColor handled dynamically
+  scrollContent: {
+    padding: 20,
   },
-  listContainer: {
-    paddingVertical: 16,
-    paddingHorizontal: 16,
+  header: {
+    alignItems: 'center',
+    marginBottom: 20,
   },
-  listContainerWithTabBar: {
-    paddingBottom: 100, // Extra padding for floating tab bar
+  welcomeText: {
+    fontSize: 20,
+    color: colors.textSecondary,
+    fontWeight: '600',
   },
-  demoCard: {
-    borderRadius: 12,
+  appTitle: {
+    fontSize: 36,
+    fontWeight: '900',
+    color: colors.primary,
+    marginTop: 5,
+    textAlign: 'center',
+  },
+  subtitle: {
+    fontSize: 16,
+    color: colors.textSecondary,
+    marginTop: 8,
+    textAlign: 'center',
+  },
+  coinsContainer: {
+    backgroundColor: colors.card,
+    paddingHorizontal: 24,
+    paddingVertical: 12,
+    borderRadius: 25,
+    marginTop: 16,
+    boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.1)',
+    elevation: 3,
+  },
+  coinsText: {
+    fontSize: 20,
+    fontWeight: '800',
+    color: colors.text,
+  },
+  characterContainer: {
+    alignItems: 'center',
+    marginBottom: 30,
+  },
+  character: {
+    fontSize: 80,
+    marginBottom: 10,
+  },
+  speechBubble: {
+    backgroundColor: colors.card,
     padding: 16,
-    marginBottom: 12,
-    flexDirection: 'row',
-    alignItems: 'center',
+    borderRadius: 20,
+    maxWidth: '80%',
+    boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.1)',
+    elevation: 3,
   },
-  demoIcon: {
-    width: 48,
-    height: 48,
+  speechText: {
+    fontSize: 16,
+    color: colors.text,
+    textAlign: 'center',
+    fontWeight: '600',
+  },
+  menuGrid: {
+    gap: 16,
+  },
+  menuCard: {
     borderRadius: 24,
-    justifyContent: 'center',
+    padding: 24,
     alignItems: 'center',
-    marginRight: 16,
+    boxShadow: '0px 6px 16px rgba(0, 0, 0, 0.15)',
+    elevation: 5,
+    marginBottom: 16,
   },
-  demoContent: {
-    flex: 1,
+  menuIcon: {
+    fontSize: 56,
+    marginBottom: 12,
   },
-  demoTitle: {
-    fontSize: 18,
-    fontWeight: '600',
-    marginBottom: 4,
-    // color handled dynamically
+  menuTitle: {
+    fontSize: 24,
+    fontWeight: '800',
+    color: colors.card,
+    marginBottom: 8,
   },
-  demoDescription: {
+  menuDescription: {
     fontSize: 14,
-    lineHeight: 18,
-    // color handled dynamically
-  },
-  headerButtonContainer: {
-    padding: 6,
-  },
-  tryButton: {
-    paddingHorizontal: 16,
-    paddingVertical: 8,
-    borderRadius: 6,
-  },
-  tryButtonText: {
-    fontSize: 14,
+    color: colors.card,
+    textAlign: 'center',
     fontWeight: '600',
-    // color handled dynamically
+    opacity: 0.9,
+  },
+  bottomPadding: {
+    height: 100,
   },
 });
