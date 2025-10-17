@@ -2,14 +2,22 @@
 import { StyleSheet, ViewStyle, TextStyle } from 'react-native';
 
 export const colors = {
-  background: '#F7F2FA',
-  text: '#343434',
-  textSecondary: '#717171',
-  primary: '#FF6B6B',
+  background: '#FFF5F7',
+  text: '#2D3748',
+  textSecondary: '#718096',
+  primary: '#FF6B9D',
   secondary: '#4ECDC4',
-  accent: '#FFE66D',
+  accent: '#FFD93D',
   card: '#FFFFFF',
-  highlight: '#FFD9E0',
+  highlight: '#FFE5EC',
+  success: '#22C55E',
+  warning: '#F59E0B',
+  error: '#EF4444',
+  purple: '#A78BFA',
+  orange: '#FF8C42',
+  blue: '#60A5FA',
+  green: '#34D399',
+  pink: '#F472B6',
 };
 
 export const commonStyles = StyleSheet.create({

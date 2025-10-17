@@ -5,6 +5,7 @@ import { useRouter, useLocalSearchParams } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { colors } from '@/styles/commonStyles';
 import { lessonsData } from '@/data/lessonsData';
+import { quizzesData } from '@/data/quizzesData';
 import { useProgress } from '@/contexts/ProgressContext';
 import { IconSymbol } from '@/components/IconSymbol';
 
@@ -15,6 +16,7 @@ export default function LessonDetailScreen() {
   const [currentPage, setCurrentPage] = useState(0);
 
   const lesson = lessonsData.find(l => l.id === id);
+  const quiz = quizzesData.find(q => q.lessonId === id);
 
   if (!lesson) {
     return (
@@ -31,20 +33,35 @@ export default function LessonDetailScreen() {
       completeLesson(lesson.id);
       addCoins(10);
       addBadge('🎓');
-      Alert.alert(
-        '🎉 Lesson Complete!',
-        'You earned 10 coins! Ready for a quiz?',
-        [
-          {
-            text: 'Take Quiz',
-            onPress: () => router.push(`/quizzes/quiz-${lesson.id}` as any),
-          },
-          {
-            text: 'Later',
-            onPress: () => router.back(),
-          },
-        ]
-      );
+      
+      if (quiz) {
+        Alert.alert(
+          '🎉 Lesson Complete!',
+          'You earned 10 coins! Now let&apos;s test what you learned with a fun quiz!',
+          [
+            {
+              text: 'Start Quiz! 🎯',
+              onPress: () => router.push(`/quizzes/${quiz.id}` as any),
+            },
+            {
+              text: 'Skip for Now',
+              onPress: () => router.back(),
+              style: 'cancel',
+            },
+          ]
+        );
+      } else {
+        Alert.alert(
+          '🎉 Lesson Complete!',
+          'You earned 10 coins! Great job learning!',
+          [
+            {
+              text: 'Awesome!',
+              onPress: () => router.back(),
+            },
+          ]
+        );
+      }
     } else {
       setCurrentPage(currentPage + 1);
     }
@@ -91,11 +108,21 @@ export default function LessonDetailScreen() {
           <View style={styles.speechBubble}>
             <Text style={styles.speechText}>
               {isLastPage 
-                ? 'Great job! You&apos;re learning so much!'
+                ? 'Great job! You&apos;re learning so much! Ready for a quiz?'
                 : 'Keep reading to learn more!'}
             </Text>
           </View>
         </View>
+
+        {isLastPage && quiz && (
+          <View style={styles.quizPreview}>
+            <Text style={styles.quizPreviewIcon}>🎯</Text>
+            <Text style={styles.quizPreviewTitle}>Quiz Time!</Text>
+            <Text style={styles.quizPreviewText}>
+              Test your knowledge with {quiz.questions.length} fun questions!
+            </Text>
+          </View>
+        )}
       </ScrollView>
 
       <View style={styles.navigationBar}>
@@ -208,6 +235,32 @@ const styles = StyleSheet.create({
     color: colors.text,
     textAlign: 'center',
     fontWeight: '600',
+  },
+  quizPreview: {
+    backgroundColor: '#A78BFA',
+    borderRadius: 24,
+    padding: 24,
+    alignItems: 'center',
+    marginBottom: 20,
+    boxShadow: '0px 6px 16px rgba(0, 0, 0, 0.15)',
+    elevation: 5,
+  },
+  quizPreviewIcon: {
+    fontSize: 60,
+    marginBottom: 12,
+  },
+  quizPreviewTitle: {
+    fontSize: 24,
+    fontWeight: '900',
+    color: colors.card,
+    marginBottom: 8,
+  },
+  quizPreviewText: {
+    fontSize: 16,
+    fontWeight: '600',
+    color: colors.card,
+    textAlign: 'center',
+    opacity: 0.95,
   },
   navigationBar: {
     flexDirection: 'row',

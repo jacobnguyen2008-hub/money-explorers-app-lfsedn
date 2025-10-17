@@ -3,68 +3,16 @@ import React from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Animated } from 'react-native';
 import { useRouter } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { LinearGradient } from 'expo-linear-gradient';
 import { colors, commonStyles } from '@/styles/commonStyles';
 import { useProgress } from '@/contexts/ProgressContext';
-import { LinearGradient } from 'expo-linear-gradient';
 
 export default function HomeScreen() {
   const router = useRouter();
   const { progress } = useProgress();
-  const scaleAnim = React.useRef(new Animated.Value(1)).current;
-
-  const menuItems = [
-    {
-      title: 'Learn',
-      icon: '📚',
-      color: colors.primary,
-      route: '/(tabs)/learn',
-      description: 'Fun lessons about money!',
-    },
-    {
-      title: 'Games',
-      icon: '🎮',
-      color: colors.secondary,
-      route: '/(tabs)/games',
-      description: 'Play and learn!',
-    },
-    {
-      title: 'Quiz',
-      icon: '🧠',
-      color: colors.accent,
-      route: '/(tabs)/learn',
-      description: 'Test your knowledge!',
-    },
-    {
-      title: 'Rewards',
-      icon: '🏆',
-      color: '#A78BFA',
-      route: '/(tabs)/rewards',
-      description: 'Collect badges & stickers!',
-    },
-    {
-      title: 'Progress',
-      icon: '📊',
-      color: '#F472B6',
-      route: '/(tabs)/progress',
-      description: 'See how far you&apos;ve come!',
-    },
-  ];
 
   const handlePress = (route: string) => {
-    Animated.sequence([
-      Animated.timing(scaleAnim, {
-        toValue: 0.95,
-        duration: 100,
-        useNativeDriver: true,
-      }),
-      Animated.timing(scaleAnim, {
-        toValue: 1,
-        duration: 100,
-        useNativeDriver: true,
-      }),
-    ]).start(() => {
-      router.push(route as any);
-    });
+    router.push(route as any);
   };
 
   return (
@@ -73,39 +21,101 @@ export default function HomeScreen() {
         contentContainerStyle={styles.scrollContent}
         showsVerticalScrollIndicator={false}
       >
-        <View style={styles.header}>
-          <Text style={styles.welcomeText}>Welcome to</Text>
-          <Text style={styles.appTitle}>Money Quest! 🚀</Text>
-          <Text style={styles.subtitle}>Learn about money the fun way!</Text>
-          
+        <LinearGradient
+          colors={['#FF6B6B', '#FFE66D']}
+          start={{ x: 0, y: 0 }}
+          end={{ x: 1, y: 1 }}
+          style={styles.header}
+        >
+          <Text style={styles.welcomeText}>Welcome Back!</Text>
+          <Text style={styles.title}>Money Kids 💰</Text>
           <View style={styles.coinsContainer}>
-            <Text style={styles.coinsText}>💰 {progress.coins} Coins</Text>
+            <Text style={styles.coinsIcon}>🪙</Text>
+            <Text style={styles.coinsText}>{progress.coins} Coins</Text>
           </View>
+        </LinearGradient>
+
+        <View style={styles.menuContainer}>
+          <TouchableOpacity
+            activeOpacity={0.8}
+            onPress={() => handlePress('/(tabs)/learn')}
+          >
+            <LinearGradient
+              colors={['#FF6B6B', '#FF8C8C']}
+              start={{ x: 0, y: 0 }}
+              end={{ x: 1, y: 1 }}
+              style={styles.menuCard}
+            >
+              <Text style={styles.menuIcon}>📚</Text>
+              <Text style={styles.menuTitle}>Learn</Text>
+              <Text style={styles.menuDescription}>
+                Fun lessons about money!
+              </Text>
+            </LinearGradient>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            activeOpacity={0.8}
+            onPress={() => handlePress('/(tabs)/games')}
+          >
+            <LinearGradient
+              colors={['#4ECDC4', '#6FE5DC']}
+              start={{ x: 0, y: 0 }}
+              end={{ x: 1, y: 1 }}
+              style={styles.menuCard}
+            >
+              <Text style={styles.menuIcon}>🎮</Text>
+              <Text style={styles.menuTitle}>Games</Text>
+              <Text style={styles.menuDescription}>
+                Play and earn coins!
+              </Text>
+            </LinearGradient>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            activeOpacity={0.8}
+            onPress={() => handlePress('/(tabs)/rewards')}
+          >
+            <LinearGradient
+              colors={['#FFE66D', '#FFF08C']}
+              start={{ x: 0, y: 0 }}
+              end={{ x: 1, y: 1 }}
+              style={styles.menuCard}
+            >
+              <Text style={styles.menuIcon}>⭐</Text>
+              <Text style={styles.menuTitle}>Rewards</Text>
+              <Text style={styles.menuDescription}>
+                Spend your coins here!
+              </Text>
+            </LinearGradient>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            activeOpacity={0.8}
+            onPress={() => handlePress('/(tabs)/progress')}
+          >
+            <LinearGradient
+              colors={['#A78BFA', '#C4B5FD']}
+              start={{ x: 0, y: 0 }}
+              end={{ x: 1, y: 1 }}
+              style={styles.menuCard}
+            >
+              <Text style={styles.menuIcon}>📊</Text>
+              <Text style={styles.menuTitle}>Progress</Text>
+              <Text style={styles.menuDescription}>
+                See how far you&apos;ve come!
+              </Text>
+            </LinearGradient>
+          </TouchableOpacity>
         </View>
 
-        <View style={styles.characterContainer}>
-          <Text style={styles.character}>🦸‍♂️</Text>
+        <View style={styles.motivationContainer}>
+          <Text style={styles.motivationCharacter}>🦸‍♂️</Text>
           <View style={styles.speechBubble}>
             <Text style={styles.speechText}>
-              Let&apos;s go on a money adventure!
+              Keep learning! You&apos;re doing amazing! 🌟
             </Text>
           </View>
-        </View>
-
-        <View style={styles.menuGrid}>
-          {menuItems.map((item, index) => (
-            <TouchableOpacity
-              key={index}
-              activeOpacity={0.8}
-              onPress={() => handlePress(item.route)}
-            >
-              <View style={[styles.menuCard, { backgroundColor: item.color }]}>
-                <Text style={styles.menuIcon}>{item.icon}</Text>
-                <Text style={styles.menuTitle}>{item.title}</Text>
-                <Text style={styles.menuDescription}>{item.description}</Text>
-              </View>
-            </TouchableOpacity>
-          ))}
         </View>
 
         <View style={styles.bottomPadding} />
@@ -116,93 +126,105 @@ export default function HomeScreen() {
 
 const styles = StyleSheet.create({
   scrollContent: {
-    padding: 20,
+    paddingBottom: 20,
   },
   header: {
+    padding: 32,
+    borderBottomLeftRadius: 32,
+    borderBottomRightRadius: 32,
     alignItems: 'center',
-    marginBottom: 20,
+    marginBottom: 24,
+    boxShadow: '0px 8px 20px rgba(0, 0, 0, 0.15)',
+    elevation: 8,
   },
   welcomeText: {
-    fontSize: 20,
-    color: colors.textSecondary,
-    fontWeight: '600',
+    fontSize: 18,
+    fontWeight: '700',
+    color: colors.card,
+    marginBottom: 8,
+    textShadowColor: 'rgba(0, 0, 0, 0.1)',
+    textShadowOffset: { width: 0, height: 2 },
+    textShadowRadius: 4,
   },
-  appTitle: {
-    fontSize: 36,
+  title: {
+    fontSize: 40,
     fontWeight: '900',
-    color: colors.primary,
-    marginTop: 5,
-    textAlign: 'center',
-  },
-  subtitle: {
-    fontSize: 16,
-    color: colors.textSecondary,
-    marginTop: 8,
-    textAlign: 'center',
+    color: colors.card,
+    marginBottom: 16,
+    textShadowColor: 'rgba(0, 0, 0, 0.15)',
+    textShadowOffset: { width: 0, height: 3 },
+    textShadowRadius: 6,
   },
   coinsContainer: {
-    backgroundColor: colors.card,
-    paddingHorizontal: 24,
-    paddingVertical: 12,
-    borderRadius: 25,
-    marginTop: 16,
-    boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.1)',
-    elevation: 3,
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: 'rgba(255, 255, 255, 0.3)',
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+    borderRadius: 20,
+  },
+  coinsIcon: {
+    fontSize: 24,
+    marginRight: 8,
   },
   coinsText: {
     fontSize: 20,
     fontWeight: '800',
-    color: colors.text,
+    color: colors.card,
   },
-  characterContainer: {
-    alignItems: 'center',
-    marginBottom: 30,
-  },
-  character: {
-    fontSize: 80,
-    marginBottom: 10,
-  },
-  speechBubble: {
-    backgroundColor: colors.card,
-    padding: 16,
-    borderRadius: 20,
-    maxWidth: '80%',
-    boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.1)',
-    elevation: 3,
-  },
-  speechText: {
-    fontSize: 16,
-    color: colors.text,
-    textAlign: 'center',
-    fontWeight: '600',
-  },
-  menuGrid: {
+  menuContainer: {
+    padding: 20,
     gap: 16,
   },
   menuCard: {
     borderRadius: 24,
-    padding: 24,
+    padding: 28,
     alignItems: 'center',
     boxShadow: '0px 6px 16px rgba(0, 0, 0, 0.15)',
     elevation: 5,
-    marginBottom: 16,
   },
   menuIcon: {
-    fontSize: 56,
+    fontSize: 64,
     marginBottom: 12,
   },
   menuTitle: {
-    fontSize: 24,
-    fontWeight: '800',
+    fontSize: 28,
+    fontWeight: '900',
     color: colors.card,
     marginBottom: 8,
+    textShadowColor: 'rgba(0, 0, 0, 0.1)',
+    textShadowOffset: { width: 0, height: 2 },
+    textShadowRadius: 4,
   },
   menuDescription: {
-    fontSize: 14,
+    fontSize: 16,
+    fontWeight: '600',
     color: colors.card,
     textAlign: 'center',
-    fontWeight: '600',
-    opacity: 0.9,
+    opacity: 0.95,
+  },
+  motivationContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    padding: 20,
+    gap: 16,
+  },
+  motivationCharacter: {
+    fontSize: 60,
+  },
+  speechBubble: {
+    flex: 1,
+    backgroundColor: colors.card,
+    padding: 16,
+    borderRadius: 20,
+    boxShadow: '0px 4px 12px rgba(0, 0, 0, 0.1)',
+    elevation: 3,
+  },
+  speechText: {
+    fontSize: 16,
+    fontWeight: '700',
+    color: colors.text,
+    lineHeight: 22,
   },
   bottomPadding: {
     height: 100,

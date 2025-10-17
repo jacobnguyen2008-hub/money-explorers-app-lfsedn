@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Alert } from 'react-native';
 import { useRouter, useLocalSearchParams } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { LinearGradient } from 'expo-linear-gradient';
 import { colors } from '@/styles/commonStyles';
 import { quizzesData } from '@/data/quizzesData';
 import { useProgress } from '@/contexts/ProgressContext';
@@ -14,8 +15,8 @@ export default function QuizScreen() {
   const { addCoins, completeQuiz, addBadge } = useProgress();
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
-  const [showExplanation, setShowExplanation] = useState(false);
   const [score, setScore] = useState(0);
+  const [showExplanation, setShowExplanation] = useState(false);
 
   const quiz = quizzesData.find(q => q.id === id);
 
@@ -37,7 +38,7 @@ export default function QuizScreen() {
 
   const handleSubmit = () => {
     if (selectedAnswer === null) {
-      Alert.alert('Select an Answer', 'Please choose an answer before submitting!');
+      Alert.alert('Oops!', 'Please select an answer first!');
       return;
     }
 
@@ -45,30 +46,26 @@ export default function QuizScreen() {
     if (isCorrect) {
       setScore(score + 1);
     }
+
     setShowExplanation(true);
   };
 
   const handleNext = () => {
     if (isLastQuestion) {
-      const finalScore = score + (selectedAnswer === question.correctAnswer ? 1 : 0);
-      const percentage = (finalScore / quiz.questions.length) * 100;
-      const coinsEarned = Math.round(percentage / 10);
-      
+      const earnedCoins = score * 5;
       completeQuiz(quiz.id);
-      addCoins(coinsEarned);
+      addCoins(earnedCoins);
       
-      if (percentage === 100) {
+      if (score === quiz.questions.length) {
         addBadge('🏆');
-      } else if (percentage >= 80) {
-        addBadge('🌟');
       }
 
       Alert.alert(
         '🎉 Quiz Complete!',
-        `You got ${finalScore} out of ${quiz.questions.length} correct!\n\nYou earned ${coinsEarned} coins!`,
+        `You got ${score} out of ${quiz.questions.length} correct!\n\nYou earned ${earnedCoins} coins! 🪙`,
         [
           {
-            text: 'Done',
+            text: 'Awesome!',
             onPress: () => router.back(),
           },
         ]
@@ -78,6 +75,38 @@ export default function QuizScreen() {
       setSelectedAnswer(null);
       setShowExplanation(false);
     }
+  };
+
+  const getAnswerStyle = (index: number) => {
+    if (!showExplanation) {
+      return selectedAnswer === index ? styles.answerSelected : styles.answer;
+    }
+
+    if (index === question.correctAnswer) {
+      return styles.answerCorrect;
+    }
+
+    if (selectedAnswer === index && index !== question.correctAnswer) {
+      return styles.answerWrong;
+    }
+
+    return styles.answer;
+  };
+
+  const getAnswerTextStyle = (index: number) => {
+    if (!showExplanation) {
+      return selectedAnswer === index ? styles.answerTextSelected : styles.answerText;
+    }
+
+    if (index === question.correctAnswer) {
+      return styles.answerTextCorrect;
+    }
+
+    if (selectedAnswer === index && index !== question.correctAnswer) {
+      return styles.answerTextWrong;
+    }
+
+    return styles.answerText;
   };
 
   return (
@@ -94,67 +123,74 @@ export default function QuizScreen() {
         contentContainerStyle={styles.scrollContent}
         showsVerticalScrollIndicator={false}
       >
-        <View style={styles.progressContainer}>
+        <LinearGradient
+          colors={['#A78BFA', '#C4B5FD']}
+          start={{ x: 0, y: 0 }}
+          end={{ x: 1, y: 1 }}
+          style={styles.progressCard}
+        >
           <Text style={styles.progressText}>
             Question {currentQuestion + 1} of {quiz.questions.length}
           </Text>
-          <Text style={styles.scoreText}>Score: {score}</Text>
-        </View>
+          <View style={styles.progressBar}>
+            <View
+              style={[
+                styles.progressFill,
+                {
+                  width: `${((currentQuestion + 1) / quiz.questions.length) * 100}%`,
+                },
+              ]}
+            />
+          </View>
+          <Text style={styles.scoreText}>Score: {score} 🌟</Text>
+        </LinearGradient>
 
         <View style={styles.questionCard}>
-          <Text style={styles.questionIcon}>🧠</Text>
+          <Text style={styles.questionIcon}>🤔</Text>
           <Text style={styles.questionText}>{question.question}</Text>
         </View>
 
-        <View style={styles.optionsContainer}>
-          {question.options.map((option, index) => {
-            const isSelected = selectedAnswer === index;
-            const isCorrect = index === question.correctAnswer;
-            const showCorrect = showExplanation && isCorrect;
-            const showWrong = showExplanation && isSelected && !isCorrect;
-
-            return (
-              <TouchableOpacity
-                key={index}
-                onPress={() => handleAnswerSelect(index)}
-                disabled={showExplanation}
-                activeOpacity={0.8}
-              >
-                <View style={[
-                  styles.optionCard,
-                  isSelected && !showExplanation && styles.optionCardSelected,
-                  showCorrect && styles.optionCardCorrect,
-                  showWrong && styles.optionCardWrong,
-                ]}>
-                  <Text style={[
-                    styles.optionText,
-                    (showCorrect || showWrong) && styles.optionTextBold,
-                  ]}>
-                    {option}
-                  </Text>
-                  {showCorrect && <Text style={styles.checkmark}>✓</Text>}
-                  {showWrong && <Text style={styles.cross}>✗</Text>}
-                </View>
-              </TouchableOpacity>
-            );
-          })}
+        <View style={styles.answersContainer}>
+          {question.options.map((option, index) => (
+            <TouchableOpacity
+              key={index}
+              activeOpacity={0.8}
+              onPress={() => handleAnswerSelect(index)}
+              disabled={showExplanation}
+            >
+              <View style={getAnswerStyle(index)}>
+                <Text style={getAnswerTextStyle(index)}>
+                  {String.fromCharCode(65 + index)}. {option}
+                </Text>
+                {showExplanation && index === question.correctAnswer && (
+                  <Text style={styles.checkmark}>✓</Text>
+                )}
+                {showExplanation && selectedAnswer === index && index !== question.correctAnswer && (
+                  <Text style={styles.crossmark}>✗</Text>
+                )}
+              </View>
+            </TouchableOpacity>
+          ))}
         </View>
 
         {showExplanation && (
           <View style={styles.explanationCard}>
+            <Text style={styles.explanationIcon}>
+              {selectedAnswer === question.correctAnswer ? '🎉' : '💡'}
+            </Text>
             <Text style={styles.explanationTitle}>
-              {selectedAnswer === question.correctAnswer ? '🎉 Correct!' : '💡 Learn More'}
+              {selectedAnswer === question.correctAnswer ? 'Correct!' : 'Not quite!'}
             </Text>
             <Text style={styles.explanationText}>{question.explanation}</Text>
           </View>
         )}
 
         <View style={styles.characterContainer}>
-          <Text style={styles.character}>🦸‍♂️</Text>
+          <Text style={styles.character}>🦸‍♀️</Text>
           <View style={styles.speechBubble}>
             <Text style={styles.speechText}>
               {showExplanation
-                ? 'Ready for the next question?'
+                ? 'Great effort! Keep going!'
                 : 'Take your time and think carefully!'}
             </Text>
           </View>
@@ -165,17 +201,15 @@ export default function QuizScreen() {
         {!showExplanation ? (
           <TouchableOpacity
             onPress={handleSubmit}
-            style={[styles.submitButton]}
+            style={[styles.submitButton, selectedAnswer === null && styles.submitButtonDisabled]}
+            disabled={selectedAnswer === null}
           >
-            <Text style={styles.submitButtonText}>Submit Answer</Text>
+            <Text style={styles.submitButtonText}>Submit Answer ✓</Text>
           </TouchableOpacity>
         ) : (
-          <TouchableOpacity
-            onPress={handleNext}
-            style={[styles.submitButton]}
-          >
-            <Text style={styles.submitButtonText}>
-              {isLastQuestion ? 'Finish Quiz ✓' : 'Next Question →'}
+          <TouchableOpacity onPress={handleNext} style={styles.nextButton}>
+            <Text style={styles.nextButtonText}>
+              {isLastQuestion ? 'Finish Quiz! 🎉' : 'Next Question →'}
             </Text>
           </TouchableOpacity>
         )}
@@ -213,27 +247,44 @@ const styles = StyleSheet.create({
   scrollContent: {
     padding: 20,
   },
-  progressContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+  progressCard: {
+    borderRadius: 20,
+    padding: 20,
     marginBottom: 20,
+    boxShadow: '0px 4px 12px rgba(0, 0, 0, 0.1)',
+    elevation: 4,
   },
   progressText: {
     fontSize: 16,
-    fontWeight: '700',
-    color: colors.textSecondary,
+    fontWeight: '800',
+    color: colors.card,
+    textAlign: 'center',
+    marginBottom: 12,
+  },
+  progressBar: {
+    height: 8,
+    backgroundColor: 'rgba(255, 255, 255, 0.3)',
+    borderRadius: 4,
+    overflow: 'hidden',
+    marginBottom: 12,
+  },
+  progressFill: {
+    height: '100%',
+    backgroundColor: colors.card,
+    borderRadius: 4,
   },
   scoreText: {
-    fontSize: 16,
-    fontWeight: '700',
-    color: colors.primary,
+    fontSize: 18,
+    fontWeight: '800',
+    color: colors.card,
+    textAlign: 'center',
   },
   questionCard: {
-    backgroundColor: colors.secondary,
+    backgroundColor: colors.card,
     borderRadius: 24,
     padding: 24,
+    marginBottom: 20,
     alignItems: 'center',
-    marginBottom: 24,
     boxShadow: '0px 6px 16px rgba(0, 0, 0, 0.15)',
     elevation: 5,
   },
@@ -244,76 +295,119 @@ const styles = StyleSheet.create({
   questionText: {
     fontSize: 20,
     fontWeight: '800',
-    color: colors.card,
+    color: colors.text,
     textAlign: 'center',
     lineHeight: 28,
   },
-  optionsContainer: {
+  answersContainer: {
     gap: 12,
     marginBottom: 20,
   },
-  optionCard: {
+  answer: {
     backgroundColor: colors.card,
     borderRadius: 16,
     padding: 20,
+    borderWidth: 3,
+    borderColor: colors.background,
+    boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.1)',
+    elevation: 3,
+  },
+  answerSelected: {
+    backgroundColor: colors.card,
+    borderRadius: 16,
+    padding: 20,
+    borderWidth: 3,
+    borderColor: colors.primary,
+    boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.1)',
+    elevation: 3,
+  },
+  answerCorrect: {
+    backgroundColor: '#D1FAE5',
+    borderRadius: 16,
+    padding: 20,
+    borderWidth: 3,
+    borderColor: '#22C55E',
+    boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.1)',
+    elevation: 3,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+  },
+  answerWrong: {
+    backgroundColor: '#FEE2E2',
+    borderRadius: 16,
+    padding: 20,
+    borderWidth: 3,
+    borderColor: '#EF4444',
     boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.1)',
     elevation: 3,
-    borderWidth: 2,
-    borderColor: 'transparent',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
   },
-  optionCardSelected: {
-    borderColor: colors.primary,
-    backgroundColor: colors.highlight,
-  },
-  optionCardCorrect: {
-    borderColor: '#22C55E',
-    backgroundColor: '#DCFCE7',
-  },
-  optionCardWrong: {
-    borderColor: '#EF4444',
-    backgroundColor: '#FEE2E2',
-  },
-  optionText: {
+  answerText: {
     fontSize: 16,
+    fontWeight: '700',
     color: colors.text,
-    fontWeight: '600',
+    lineHeight: 22,
+  },
+  answerTextSelected: {
+    fontSize: 16,
+    fontWeight: '800',
+    color: colors.primary,
+    lineHeight: 22,
+  },
+  answerTextCorrect: {
+    fontSize: 16,
+    fontWeight: '800',
+    color: '#22C55E',
+    lineHeight: 22,
     flex: 1,
   },
-  optionTextBold: {
+  answerTextWrong: {
+    fontSize: 16,
     fontWeight: '800',
+    color: '#EF4444',
+    lineHeight: 22,
+    flex: 1,
   },
   checkmark: {
     fontSize: 24,
     color: '#22C55E',
     fontWeight: '900',
   },
-  cross: {
+  crossmark: {
     fontSize: 24,
     color: '#EF4444',
     fontWeight: '900',
   },
   explanationCard: {
-    backgroundColor: colors.accent,
+    backgroundColor: '#FEF3C7',
     borderRadius: 20,
     padding: 20,
     marginBottom: 20,
-    boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.1)',
-    elevation: 3,
+    alignItems: 'center',
+    borderWidth: 3,
+    borderColor: '#F59E0B',
+    boxShadow: '0px 4px 12px rgba(0, 0, 0, 0.1)',
+    elevation: 4,
+  },
+  explanationIcon: {
+    fontSize: 48,
+    marginBottom: 12,
   },
   explanationTitle: {
-    fontSize: 20,
-    fontWeight: '800',
-    color: colors.text,
+    fontSize: 22,
+    fontWeight: '900',
+    color: '#92400E',
     marginBottom: 8,
   },
   explanationText: {
     fontSize: 16,
-    color: colors.text,
-    lineHeight: 24,
     fontWeight: '600',
+    color: '#92400E',
+    textAlign: 'center',
+    lineHeight: 22,
   },
   characterContainer: {
     alignItems: 'center',
@@ -345,13 +439,31 @@ const styles = StyleSheet.create({
   },
   submitButton: {
     backgroundColor: colors.primary,
-    paddingVertical: 16,
+    paddingVertical: 18,
     borderRadius: 16,
     alignItems: 'center',
+    boxShadow: '0px 4px 12px rgba(0, 0, 0, 0.15)',
+    elevation: 5,
+  },
+  submitButtonDisabled: {
+    opacity: 0.4,
   },
   submitButtonText: {
     fontSize: 18,
-    fontWeight: '800',
+    fontWeight: '900',
+    color: colors.card,
+  },
+  nextButton: {
+    backgroundColor: colors.secondary,
+    paddingVertical: 18,
+    borderRadius: 16,
+    alignItems: 'center',
+    boxShadow: '0px 4px 12px rgba(0, 0, 0, 0.15)',
+    elevation: 5,
+  },
+  nextButtonText: {
+    fontSize: 18,
+    fontWeight: '900',
     color: colors.card,
   },
   errorText: {

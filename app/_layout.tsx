@@ -1,6 +1,6 @@
 
 import "react-native-reanimated";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useFonts } from "expo-font";
 import { Stack, router } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
@@ -22,7 +22,7 @@ import { colors } from "@/styles/commonStyles";
 SplashScreen.preventAutoHideAsync();
 
 export const unstable_settings = {
-  initialRouteName: "(tabs)",
+  initialRouteName: "splash",
 };
 
 export default function RootLayout() {
@@ -31,6 +31,7 @@ export default function RootLayout() {
   const [loaded] = useFonts({
     SpaceMono: require("../assets/fonts/SpaceMono-Regular.ttf"),
   });
+  const [showSplash, setShowSplash] = useState(true);
 
   useEffect(() => {
     if (loaded) {
@@ -75,6 +76,13 @@ export default function RootLayout() {
           <WidgetProvider>
             <GestureHandlerRootView style={{ flex: 1 }}>
               <Stack>
+                <Stack.Screen 
+                  name="splash" 
+                  options={{ 
+                    headerShown: false,
+                    animation: 'fade',
+                  }} 
+                />
                 <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
                 <Stack.Screen
                   name="lessons/[id]"
