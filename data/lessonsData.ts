@@ -12,15 +12,15 @@ export const lessonsData: Lesson[] = [
     content: [
       {
         type: 'text',
-        content: 'Money is something we use to buy things we need and want! Long ago, people traded items, but money made it easier.',
+        content: 'Money is what we use to buy things we need and want! A long time ago, people traded things. But money made it easier.',
       },
       {
         type: 'text',
-        content: 'Money comes in different forms: coins, bills, and even digital money on phones and computers!',
+        content: 'Money can be coins, paper bills, or even on phones and computers!',
       },
       {
         type: 'text',
-        content: 'We earn money by working, doing chores, or helping others. Then we can use it to buy food, toys, and other things!',
+        content: 'We get money by working or doing chores. Then we can use it to buy food, toys, and other things!',
       },
     ],
   },
@@ -34,19 +34,19 @@ export const lessonsData: Lesson[] = [
     content: [
       {
         type: 'text',
-        content: 'Needs are things you must have to live and be healthy, like food, water, clothes, and a home!',
+        content: 'Needs are things you must have to live. Like food, water, clothes, and a home!',
       },
       {
         type: 'text',
-        content: 'Wants are things that would be nice to have but you can live without, like toys, candy, and video games!',
+        content: 'Wants are things that are nice to have but you can live without. Like toys, candy, and video games!',
       },
       {
         type: 'text',
-        content: 'It&apos;s important to spend money on needs first, then save for wants. This helps you make smart money choices!',
+        content: 'Buy needs first, then save for wants. This helps you make smart choices!',
       },
       {
         type: 'text',
-        content: 'Ask yourself: Do I need this to be healthy and safe, or do I just want it? This helps you decide!',
+        content: 'Ask yourself: Do I need this to be safe and healthy? Or do I just want it?',
       },
     ],
   },
@@ -60,11 +60,11 @@ export const lessonsData: Lesson[] = [
     content: [
       {
         type: 'text',
-        content: 'Spending means using your money to buy something right now. Saving means keeping your money for later!',
+        content: 'Spending means using your money to buy something now. Saving means keeping your money for later!',
       },
       {
         type: 'text',
-        content: 'It&apos;s smart to save some money for things you really want or for emergencies. Try to save a little bit every time you get money!',
+        content: 'Save some money for things you really want or for when you need it. Try to save a little bit every time you get money!',
       },
       {
         type: 'text',
@@ -82,21 +82,21 @@ export const lessonsData: Lesson[] = [
     content: [
       {
         type: 'text',
-        content: 'You can earn money by doing chores at home like cleaning your room, washing dishes, or helping with yard work!',
+        content: 'You can earn money by doing chores at home. Like cleaning your room, washing dishes, or helping with yard work!',
       },
       {
         type: 'text',
-        content: 'Some kids get an allowance from their parents for helping around the house. This teaches you about earning money!',
+        content: 'Some kids get money from their parents for helping around the house. This teaches you about earning money!',
       },
       {
         type: 'text',
-        content: 'When you grow up, you&apos;ll have a job where you work and earn money. The harder you work and learn, the more you can earn!',
+        content: 'When you grow up, you will have a job where you work and earn money. The harder you work and learn, the more you can earn!',
       },
     ],
   },
   {
     id: 'budgeting-basics',
-    title: 'Budgeting Basics',
+    title: 'Planning Your Money',
     description: 'Learn how to plan your spending!',
     icon: '📊',
     color: '#95E1D3',
@@ -104,7 +104,7 @@ export const lessonsData: Lesson[] = [
     content: [
       {
         type: 'text',
-        content: 'A budget is a plan for your money! It helps you decide how much to save, spend, and share.',
+        content: 'A plan for your money helps you decide how much to save, spend, and share.',
       },
       {
         type: 'text',
@@ -112,11 +112,11 @@ export const lessonsData: Lesson[] = [
       },
       {
         type: 'text',
-        content: 'Many people use the 50-30-20 rule: 50% for needs, 30% for wants, and 20% for savings. You can adjust this for your goals!',
+        content: 'Many people use this rule: Half for needs, some for wants, and some for savings.',
       },
       {
         type: 'text',
-        content: 'Writing down your budget helps you stick to it. You can use a notebook, app, or chart to track your money!',
+        content: 'Writing down your plan helps you stick to it. You can use a notebook or chart to track your money!',
       },
     ],
   },
@@ -130,15 +130,15 @@ export const lessonsData: Lesson[] = [
     content: [
       {
         type: 'text',
-        content: 'A bank is a safe place where people keep their money. It&apos;s like a super secure piggy bank!',
+        content: 'A bank is a safe place where people keep their money. It is like a super safe piggy bank!',
       },
       {
         type: 'text',
-        content: 'Banks keep your money safe and can even help it grow a little bit over time. This is called earning interest!',
+        content: 'Banks keep your money safe. They can even help it grow a little bit over time!',
       },
       {
         type: 'text',
-        content: 'You can put money in the bank (deposit) or take money out (withdraw) whenever you need it!',
+        content: 'You can put money in the bank or take money out when you need it!',
       },
     ],
   },
@@ -152,25 +152,25 @@ export const lessonsData: Lesson[] = [
     content: [
       {
         type: 'text',
-        content: 'Coins are small metal pieces of money. In the US, we have pennies (1¢), nickels (5¢), dimes (10¢), and quarters (25¢)!',
+        content: 'Coins are small metal pieces of money. We have pennies (1 cent), nickels (5 cents), dimes (10 cents), and quarters (25 cents)!',
       },
       {
         type: 'text',
-        content: 'Bills are paper money. Common bills are $1, $5, $10, $20, $50, and $100. The bigger the number, the more it&apos;s worth!',
+        content: 'Bills are paper money. Common bills are $1, $5, $10, and $20. The bigger the number, the more it is worth!',
       },
       {
         type: 'text',
-        content: 'Digital money is stored on computers and phones. You can&apos;t touch it, but it&apos;s real money you can use to buy things online!',
+        content: 'Digital money is on computers and phones. You cannot touch it, but it is real money you can use to buy things online!',
       },
       {
         type: 'text',
-        content: 'Debit and credit cards let you use money without carrying cash. They&apos;re connected to your bank account or credit!',
+        content: 'Cards let you use money without carrying cash. They are connected to your bank!',
       },
     ],
   },
   {
     id: 'charity-and-giving',
-    title: 'Charity and Giving',
+    title: 'Helping Others',
     description: 'Learn about helping others with money!',
     icon: '❤️',
     color: '#FF6B9D',
@@ -178,25 +178,25 @@ export const lessonsData: Lesson[] = [
     content: [
       {
         type: 'text',
-        content: 'Charity means giving money or help to people who need it. It&apos;s a wonderful way to make the world better!',
+        content: 'Giving means sharing money or help with people who need it. It is a great way to make the world better!',
       },
       {
         type: 'text',
-        content: 'You can donate to organizations that help animals, feed hungry people, or support kids who need school supplies!',
+        content: 'You can give to groups that help animals, feed hungry people, or help kids who need school supplies!',
       },
       {
         type: 'text',
-        content: 'Even small amounts help! If you save just a little bit to give away, you can make a big difference in someone&apos;s life.',
+        content: 'Even small amounts help! If you save just a little bit to give away, you can make a big difference.',
       },
       {
         type: 'text',
-        content: 'Giving feels good! When you help others, you feel happy and proud. It&apos;s one of the best things you can do with money!',
+        content: 'Giving feels good! When you help others, you feel happy and proud.',
       },
     ],
   },
   {
     id: 'financial-goals',
-    title: 'Setting Financial Goals',
+    title: 'Setting Money Goals',
     description: 'Learn how to save for what you want!',
     icon: '🎯',
     color: '#87CEEB',
@@ -204,19 +204,19 @@ export const lessonsData: Lesson[] = [
     content: [
       {
         type: 'text',
-        content: 'A financial goal is something you want to buy or save for in the future. It could be a toy, game, or even college!',
+        content: 'A money goal is something you want to buy or save for later. It could be a toy, game, or even college!',
       },
       {
         type: 'text',
-        content: 'Short-term goals are things you want soon, like a new book. Long-term goals take longer, like saving for a bike!',
+        content: 'Short goals are things you want soon, like a new book. Long goals take more time, like saving for a bike!',
       },
       {
         type: 'text',
-        content: 'Write down your goal and how much it costs. Then figure out how much to save each week to reach it!',
+        content: 'Write down your goal and how much it costs. Then figure out how much to save each week!',
       },
       {
         type: 'text',
-        content: 'Track your progress! Draw a chart or use a jar to see your savings grow. It&apos;s exciting to watch yourself get closer!',
+        content: 'Track your progress! Draw a chart or use a jar to see your savings grow. It is fun to watch!',
       },
     ],
   },
@@ -230,11 +230,11 @@ export const lessonsData: Lesson[] = [
     content: [
       {
         type: 'text',
-        content: 'A price is how much something costs. It&apos;s usually shown with a dollar sign ($) and numbers, like $5.99!',
+        content: 'A price is how much something costs. It usually has a dollar sign ($) and numbers, like $5.99!',
       },
       {
         type: 'text',
-        content: 'The number before the dot is dollars, and the number after is cents. There are 100 cents in one dollar!',
+        content: 'The number before the dot is dollars. The number after is cents. There are 100 cents in one dollar!',
       },
       {
         type: 'text',
@@ -242,7 +242,7 @@ export const lessonsData: Lesson[] = [
       },
       {
         type: 'text',
-        content: 'Sometimes bigger packages cost less per item. This is called buying in bulk, and it can save you money!',
+        content: 'Sometimes bigger packages cost less per item. This can save you money!',
       },
     ],
   },
@@ -264,17 +264,17 @@ export const lessonsData: Lesson[] = [
       },
       {
         type: 'text',
-        content: 'Practice makes perfect! Try counting coins at home. Remember: 4 quarters = $1, 10 dimes = $1, 20 nickels = $1!',
+        content: 'Practice makes perfect! Try counting coins at home. Remember: 4 quarters = $1, 10 dimes = $1!',
       },
       {
         type: 'text',
-        content: 'Always check your change before leaving a store. It&apos;s okay to count it to make sure it&apos;s correct!',
+        content: 'Always check your change before leaving a store. It is okay to count it!',
       },
     ],
   },
   {
     id: 'simple-investing',
-    title: 'Simple Investing',
+    title: 'Making Money Grow',
     description: 'Learn how to make your money grow!',
     icon: '📈',
     color: '#F472B6',
@@ -282,7 +282,7 @@ export const lessonsData: Lesson[] = [
     content: [
       {
         type: 'text',
-        content: 'Investing means using your money to help it grow into more money over time. It&apos;s like planting a money tree!',
+        content: 'Investing means using your money to help it grow into more money over time. It is like planting a money tree!',
       },
       {
         type: 'text',
@@ -290,13 +290,13 @@ export const lessonsData: Lesson[] = [
       },
       {
         type: 'text',
-        content: 'Investing takes patience. It&apos;s best for money you don&apos;t need right away. Start small and learn as you grow!',
+        content: 'Investing takes time. It is best for money you do not need right away. Start small and learn as you grow!',
       },
     ],
   },
   {
     id: 'credit-cards-intro',
-    title: 'Credit Cards Basics',
+    title: 'Credit Cards',
     description: 'Learn what credit cards are!',
     icon: '💳',
     color: '#9B59B6',
@@ -308,15 +308,15 @@ export const lessonsData: Lesson[] = [
       },
       {
         type: 'text',
-        content: 'Credit cards are different from debit cards. Debit cards use your own money, but credit cards use borrowed money!',
+        content: 'Credit cards are different from other cards. Some cards use your own money, but credit cards use borrowed money!',
       },
       {
         type: 'text',
-        content: 'If you don&apos;t pay back the money on time, you have to pay extra money called interest. That&apos;s why it&apos;s important to be careful!',
+        content: 'If you do not pay back the money on time, you have to pay extra money. That is why it is important to be careful!',
       },
       {
         type: 'text',
-        content: 'Adults use credit cards responsibly by only buying what they can afford to pay back. It&apos;s a big responsibility!',
+        content: 'Adults use credit cards carefully by only buying what they can afford to pay back.',
       },
     ],
   },
@@ -330,19 +330,19 @@ export const lessonsData: Lesson[] = [
     content: [
       {
         type: 'text',
-        content: 'Borrowing means getting something from someone with a promise to give it back. Lending means giving something to someone temporarily!',
+        content: 'Borrowing means getting something from someone with a promise to give it back. Lending means giving something to someone for a while!',
       },
       {
         type: 'text',
-        content: 'When you borrow money, you should always pay it back. This builds trust and shows you&apos;re responsible!',
+        content: 'When you borrow money, you should always pay it back. This builds trust!',
       },
       {
         type: 'text',
-        content: 'Sometimes people charge interest when they lend money. This means you pay back a little extra for borrowing!',
+        content: 'Sometimes people charge extra when they lend money. This means you pay back a little more for borrowing!',
       },
       {
         type: 'text',
-        content: 'Only borrow what you really need and can pay back. It&apos;s better to save up than to borrow too much!',
+        content: 'Only borrow what you really need and can pay back. It is better to save up!',
       },
     ],
   },
@@ -356,25 +356,25 @@ export const lessonsData: Lesson[] = [
     content: [
       {
         type: 'text',
-        content: 'Online shopping means buying things on the internet. It&apos;s convenient, but you need to be safe!',
+        content: 'Online shopping means buying things on the internet. It is easy, but you need to be safe!',
       },
       {
         type: 'text',
-        content: 'Always shop with a parent or trusted adult. Never give out personal information or credit card numbers by yourself!',
+        content: 'Always shop with a parent or trusted adult. Never give out personal information by yourself!',
       },
       {
         type: 'text',
-        content: 'Look for secure websites. They have a lock icon in the address bar and start with &quot;https&quot; instead of &quot;http&quot;!',
+        content: 'Look for safe websites. They have a lock icon and start with "https"!',
       },
       {
         type: 'text',
-        content: 'Be careful of deals that seem too good to be true. If something is super cheap, it might be a scam!',
+        content: 'Be careful of deals that seem too good to be true. If something is super cheap, it might not be real!',
       },
     ],
   },
   {
     id: 'entrepreneurship-kids',
-    title: 'Entrepreneurship for Kids',
+    title: 'Starting Your Own Business',
     description: 'Learn how to start your own business!',
     icon: '🚀',
     color: '#F39C12',
@@ -382,19 +382,19 @@ export const lessonsData: Lesson[] = [
     content: [
       {
         type: 'text',
-        content: 'An entrepreneur is someone who starts their own business! You can be one too by selling lemonade, crafts, or offering services!',
+        content: 'A business owner is someone who starts their own business! You can be one too by selling lemonade, crafts, or helping people!',
       },
       {
         type: 'text',
-        content: 'Think about what you&apos;re good at and what people need. Maybe you can walk dogs, make friendship bracelets, or help with yard work!',
+        content: 'Think about what you are good at and what people need. Maybe you can walk dogs, make bracelets, or help with yard work!',
       },
       {
         type: 'text',
-        content: 'You&apos;ll need to spend some money to start (like buying supplies). This is called an investment. Then you sell for more than it cost!',
+        content: 'You will need to spend some money to start, like buying supplies. Then you sell for more than it cost!',
       },
       {
         type: 'text',
-        content: 'Keep track of what you spend and what you earn. The difference is your profit - that&apos;s the money you get to keep!',
+        content: 'Keep track of what you spend and what you earn. The difference is your profit - that is the money you get to keep!',
       },
     ],
   },
@@ -408,25 +408,25 @@ export const lessonsData: Lesson[] = [
     content: [
       {
         type: 'text',
-        content: 'Value is how much something is worth to you or others. Some things cost a lot but aren&apos;t valuable to everyone!',
+        content: 'Value is how much something is worth to you or others. Some things cost a lot but are not valuable to everyone!',
       },
       {
         type: 'text',
-        content: 'Quality matters! Sometimes it&apos;s better to buy one good item that lasts than many cheap items that break quickly!',
+        content: 'Quality matters! Sometimes it is better to buy one good item that lasts than many cheap items that break!',
       },
       {
         type: 'text',
-        content: 'Think about how much you&apos;ll use something before buying it. If you&apos;ll use it a lot, it has more value to you!',
+        content: 'Think about how much you will use something before buying it. If you will use it a lot, it has more value!',
       },
       {
         type: 'text',
-        content: 'Some things have sentimental value - they&apos;re special because of memories, not because they cost a lot of money!',
+        content: 'Some things are special because of memories, not because they cost a lot of money!',
       },
     ],
   },
   {
     id: 'family-budgets',
-    title: 'Family Budgets',
+    title: 'Family Money Plans',
     description: 'Learn how families manage money together!',
     icon: '👨‍👩‍👧‍👦',
     color: '#E67E22',
@@ -434,25 +434,25 @@ export const lessonsData: Lesson[] = [
     content: [
       {
         type: 'text',
-        content: 'Families create budgets to make sure they have enough money for everything they need, like food, housing, and fun activities!',
+        content: 'Families make plans to make sure they have enough money for everything they need, like food, housing, and fun!',
       },
       {
         type: 'text',
-        content: 'Parents pay for things like rent or mortgage, electricity, water, food, and transportation. These are called expenses!',
+        content: 'Parents pay for things like rent, electricity, water, food, and cars. These are called expenses!',
       },
       {
         type: 'text',
-        content: 'Families save money for big things like vacations, new cars, or emergencies. Everyone can help by being smart with money!',
+        content: 'Families save money for big things like trips, new cars, or when something breaks. Everyone can help!',
       },
       {
         type: 'text',
-        content: 'You can help your family save by turning off lights, not wasting food, and taking care of your belongings so they last longer!',
+        content: 'You can help your family save by turning off lights, not wasting food, and taking care of your things!',
       },
     ],
   },
   {
     id: 'emergency-funds',
-    title: 'Emergency Funds',
+    title: 'Emergency Money',
     description: 'Learn why saving for emergencies is important!',
     icon: '🆘',
     color: '#C0392B',
@@ -460,19 +460,19 @@ export const lessonsData: Lesson[] = [
     content: [
       {
         type: 'text',
-        content: 'An emergency fund is money saved for unexpected problems, like when something breaks or someone gets sick!',
+        content: 'Emergency money is saved for when something unexpected happens, like when something breaks or someone gets sick!',
       },
       {
         type: 'text',
-        content: 'Emergencies can happen anytime! Having saved money means you&apos;re prepared and don&apos;t have to worry as much!',
+        content: 'Problems can happen anytime! Having saved money means you are ready and do not have to worry as much!',
       },
       {
         type: 'text',
-        content: 'Try to save a little bit regularly for emergencies. Even small amounts add up over time and can really help!',
+        content: 'Try to save a little bit often for emergencies. Even small amounts add up over time!',
       },
       {
         type: 'text',
-        content: 'Keep your emergency money separate from spending money. This way you won&apos;t accidentally use it for other things!',
+        content: 'Keep your emergency money separate from spending money. This way you will not use it by accident!',
       },
     ],
   },
@@ -486,45 +486,45 @@ export const lessonsData: Lesson[] = [
     content: [
       {
         type: 'text',
-        content: 'Make a list before shopping! This helps you remember what you need and avoid buying things you don&apos;t need!',
+        content: 'Make a list before shopping! This helps you remember what you need and not buy things you do not need!',
       },
       {
         type: 'text',
-        content: 'Look for sales and discounts! Many stores have special deals where you can buy things for less money!',
+        content: 'Look for sales! Many stores have special deals where you can buy things for less money!',
       },
       {
         type: 'text',
-        content: 'Compare prices at different stores. The same item might cost less somewhere else, so it pays to look around!',
+        content: 'Compare prices at different stores. The same item might cost less somewhere else!',
       },
       {
         type: 'text',
-        content: 'Wait before buying! If you see something you want, wait a day or week. If you still want it, then it might be worth buying!',
+        content: 'Wait before buying! If you see something you want, wait a day or week. If you still want it, then maybe buy it!',
       },
     ],
   },
   {
     id: 'money-and-happiness',
     title: 'Money and Happiness',
-    description: 'Learn the relationship between money and joy!',
+    description: 'Learn about money and joy!',
     icon: '😊',
     color: '#F1C40F',
     completed: false,
     content: [
       {
         type: 'text',
-        content: 'Money can buy things, but it can&apos;t buy happiness! The best things in life, like friendship and love, are free!',
+        content: 'Money can buy things, but it cannot buy happiness! The best things in life, like friendship and love, are free!',
       },
       {
         type: 'text',
-        content: 'Experiences often make us happier than things. A fun day with family or friends is more valuable than a new toy!',
+        content: 'Fun times often make us happier than things. A fun day with family or friends is more valuable than a new toy!',
       },
       {
         type: 'text',
-        content: 'Helping others with money can make you feel really good! Giving to charity or buying a gift for someone is special!',
+        content: 'Helping others with money can make you feel really good! Giving to others or buying a gift for someone is special!',
       },
       {
         type: 'text',
-        content: 'Being grateful for what you have is important. You don&apos;t need everything to be happy - appreciate what you already have!',
+        content: 'Be thankful for what you have. You do not need everything to be happy - enjoy what you already have!',
       },
     ],
   },

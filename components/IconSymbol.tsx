@@ -1,3 +1,4 @@
+
 // This file is a fallback for using MaterialIcons on Android and web.
 
 import React from "react";
@@ -111,6 +112,8 @@ const MAPPING = {
   "battery.25": "battery-2-bar",
   "lock.fill": "lock",
   "lock.open.fill": "lock-open",
+  "shield.fill": "shield",
+  "shield": "shield",
 
   // Shopping & Commerce
   "cart.fill": "shopping-cart",
@@ -161,6 +164,24 @@ const MAPPING = {
   "lightbulb.fill": "lightbulb",
   "moon.fill": "dark-mode",
   "sun.max.fill": "light-mode",
+
+  // Learning & Education
+  "book.fill": "menu-book",
+  "book": "menu-book",
+  "graduationcap.fill": "school",
+  "graduationcap": "school",
+
+  // Games & Entertainment
+  "gamecontroller.fill": "sports-esports",
+  "gamecontroller": "sports-esports",
+  "trophy.fill": "emoji-events",
+  "trophy": "emoji-events",
+
+  // Charts & Progress
+  "chart.bar.fill": "bar-chart",
+  "chart.bar": "bar-chart",
+  "chart.line.uptrend.xyaxis": "trending-up",
+  "chart.pie.fill": "pie-chart",
 } as Partial<
   Record<
     import("expo-symbols").SymbolViewProps["name"],

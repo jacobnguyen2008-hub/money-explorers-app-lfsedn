@@ -85,6 +85,20 @@ export default function RootLayout() {
                 />
                 <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
                 <Stack.Screen
+                  name="privacy"
+                  options={{
+                    presentation: "card",
+                    headerShown: false,
+                  }}
+                />
+                <Stack.Screen
+                  name="parental-consent"
+                  options={{
+                    presentation: "card",
+                    headerShown: false,
+                  }}
+                />
+                <Stack.Screen
                   name="lessons/[id]"
                   options={{
                     presentation: "card",
@@ -109,7 +123,7 @@ export default function RootLayout() {
                   name="games/coin-matching"
                   options={{
                     presentation: "card",
-                    headerShown: false,
+                    headerShidden: false,
                   }}
                 />
                 <Stack.Screen

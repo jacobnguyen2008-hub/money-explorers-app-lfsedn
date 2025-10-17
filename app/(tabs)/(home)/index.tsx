@@ -6,6 +6,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { LinearGradient } from 'expo-linear-gradient';
 import { colors, commonStyles } from '@/styles/commonStyles';
 import { useProgress } from '@/contexts/ProgressContext';
+import { IconSymbol } from '@/components/IconSymbol';
 
 export default function HomeScreen() {
   const router = useRouter();
@@ -27,6 +28,15 @@ export default function HomeScreen() {
           end={{ x: 1, y: 1 }}
           style={styles.header}
         >
+          <TouchableOpacity
+            style={styles.privacyButton}
+            onPress={() => handlePress('/privacy')}
+            activeOpacity={0.8}
+          >
+            <IconSymbol name="lock.fill" size={20} color={colors.card} />
+            <Text style={styles.privacyButtonText}>Privacy</Text>
+          </TouchableOpacity>
+
           <Text style={styles.welcomeText}>Welcome Back!</Text>
           <Text style={styles.title}>Money Kids 💰</Text>
           <View style={styles.coinsContainer}>
@@ -118,6 +128,13 @@ export default function HomeScreen() {
           </View>
         </View>
 
+        <View style={styles.safetyNotice}>
+          <IconSymbol name="info.circle.fill" size={24} color={colors.primary} />
+          <Text style={styles.safetyText}>
+            This app is safe for kids and follows all school privacy rules.
+          </Text>
+        </View>
+
         <View style={styles.bottomPadding} />
       </ScrollView>
     </SafeAreaView>
@@ -136,6 +153,23 @@ const styles = StyleSheet.create({
     marginBottom: 24,
     boxShadow: '0px 8px 20px rgba(0, 0, 0, 0.15)',
     elevation: 8,
+  },
+  privacyButton: {
+    position: 'absolute',
+    top: 16,
+    right: 16,
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: 'rgba(255, 255, 255, 0.3)',
+    paddingHorizontal: 12,
+    paddingVertical: 8,
+    borderRadius: 20,
+    gap: 6,
+  },
+  privacyButtonText: {
+    fontSize: 14,
+    fontWeight: '700',
+    color: colors.card,
   },
   welcomeText: {
     fontSize: 18,
@@ -225,6 +259,24 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     color: colors.text,
     lineHeight: 22,
+  },
+  safetyNotice: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: colors.card,
+    marginHorizontal: 20,
+    padding: 16,
+    borderRadius: 16,
+    gap: 12,
+    boxShadow: '0px 4px 12px rgba(0, 0, 0, 0.08)',
+    elevation: 3,
+  },
+  safetyText: {
+    flex: 1,
+    fontSize: 14,
+    fontWeight: '600',
+    color: colors.textSecondary,
+    lineHeight: 20,
   },
   bottomPadding: {
     height: 100,
